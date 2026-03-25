@@ -1,0 +1,43 @@
+#:kivy 2.3.0
+#:import RetryImage widgets.image.RetryImage
+
+<CategoriesScreen>:
+    BoxLayout:
+        orientation: 'vertical'
+        BoxLayout:
+            size_hint_y: None
+            height: dp(48)
+            Button:
+                text: '用户'
+                size_hint_x: 1
+                font_size: dp(28)
+                color: rgba('#ffffffff')
+            Label:
+                text: ''
+                size_hint_x: 3
+            Button:
+                size_hint_x: 1
+                text: '搜索'
+                font_size: dp(28)
+                color: rgba('#ffffffff')
+                on_release: root.open_search()
+        ScrollView:
+            id: scroll
+            do_scroll_x: False
+            Label:
+                id: def_label
+                text: '别着急嘛~'
+
+<CategoryItem>:
+    orientation: 'vertical'
+    height: self.minimum_height
+    size_hint_y: None
+    RetryImage:
+        size_hint: 1, None
+        id: image
+        path: root.image_path
+        height: self.width
+    Label:
+        size_hint_y: None
+        text: root.text
+        height: dp(20)

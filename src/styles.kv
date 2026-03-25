@@ -1,0 +1,19 @@
+#:kivy 2.3.0
+
+<Screen>:
+    canvas.before:
+        Color:
+            rgba: rgba('#ffffeeff')
+        Rectangle:
+            pos: self.pos
+            size: self.size
+
+<Label>:
+    color: rgba('#000000')
+    font_size: sp(16)
+
+<TinyLabel@Label>:
+    font_size: sp(12)
+
+<Link@ButtonBehavior+Label>:
+    font_size: sp(16)

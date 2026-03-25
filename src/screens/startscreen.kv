@@ -1,0 +1,23 @@
+#:kivy 2.3.0
+
+<StartScreen>:
+    BoxLayout:
+        orientation: 'vertical'
+        Label:
+            size_hint_y: 2
+            text: 'Pica Viewer'
+            bold: True
+            font_size: dp(36)
+        Label:
+            text: 'Developed by TalkDe'
+            font_size: dp(16)
+        Button:
+            text: '编辑配置'
+            on_release: root.manager.screen_open('config')
+            color: 1, 1, 1, 1
+            font_size: dp(24)
+        Button:
+            text: '进入！'
+            on_release: root.sign_in()
+            color: 1, 1, 1, 1
+            font_size: dp(24)

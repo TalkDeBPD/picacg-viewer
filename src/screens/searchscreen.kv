@@ -1,0 +1,70 @@
+#:kivy 2.3.0
+#:import Header widgets.header.Header
+#:import SortButton widgets.sort.SortButton
+
+<SearchScreen>:
+    BoxLayout:
+        orientation: 'vertical'
+        Header:
+            title: '高级搜索'
+        ScrollView:
+            do_scroll_x: False
+            BoxLayout:
+                orientation: 'vertical'
+                height: self.minimum_height
+                size_hint_y: None
+                BoxLayout:
+                    size_hint_y: None
+                    height: dp(30)
+                    TextInput:
+                        id: keyword
+                        multiline: False
+                        hint_text: '搜索关键字……'
+                    Button:
+                        text: '搜索'
+                        size_hint_x: None
+                        width: dp(40)
+                        on_release: root.on_search()
+                        color: '#ffffffff'
+                BoxLayout:
+                    size_hint_y: None
+                    height: dp(30)
+                    SortButton:
+                        id: sort
+                        size_hint_x: 2
+                    TextInput:
+                        id: page_index
+                        hint_text: '页码'
+                        input_filter: 'int'
+                        multiline: False
+                        text: '1'
+                    Label:
+                        text: '/' + str(root.ptotal)
+                        text_size: self.width - dp(8), None
+                BoxLayout:
+                    size_hint_y: None
+                    height: dp(30)
+                    Button:
+                        text: '上一页'
+                        color: 1, 1, 1, 1
+                        on_release: root.last()
+                    Button:
+                        text: '下一页'
+                        color: 1, 1, 1, 1
+                        on_release: root.next()
+                BoxLayout:
+                    id: docs
+                    height: self.minimum_height
+                    size_hint_y: None
+                    orientation: 'vertical'
+                BoxLayout:
+                    size_hint_y: None
+                    height: dp(30)
+                    Button:
+                        text: '上一页'
+                        color: 1, 1, 1, 1
+                        on_release: root.last()
+                    Button:
+                        text: '下一页'
+                        color: 1, 1, 1, 1
+                        on_release: root.next()

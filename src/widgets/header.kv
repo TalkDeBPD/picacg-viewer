@@ -1,0 +1,20 @@
+<Header>:
+    orientation: 'horizontal'
+    height: dp(56)
+    size_hint_y: None
+    Button:
+        id: back_but
+        text: '←'
+        font_size: '42sp'
+        size_hint_x: None
+        width: dp(56)
+        on_release: app.root.screen_back()
+        color: 1, 1, 1, 1
+    Label:
+        text: root.title
+        font_size: '20sp'
+        halign: 'left'
+        valign: 'middle'
+        text_size: self.width, None
+        padding: dp(16), 0
+        bold: True

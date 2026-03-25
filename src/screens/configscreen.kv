@@ -1,0 +1,35 @@
+#:kivy 2.3.0
+#:import ConfigPage widgets.config.ConfigPage
+#:import StringConfigItem widgets.config.StringConfigItem
+#:import SelectConfigItem widgets.config.SelectConfigItem
+#:import Header widgets.header.Header
+
+<ConfigScreen>:
+    BoxLayout:
+        orientation: 'vertical'
+        Header:
+            title: '配置页面'
+        ScrollView:
+            do_scroll_x: False
+            ConfigPage:
+                id: bl
+                height: self.minimum_height
+                StringConfigItem:
+                    config_title: '用户名/邮箱'
+                    config_key: 'email'
+                StringConfigItem:
+                    config_title: '密码'
+                    config_key: 'password'
+                StringConfigItem:
+                    config_title: '用户token'
+                    config_key: 'token'
+                StringConfigItem:
+                    config_title: '默认API服务器'
+                    config_key: 'apiserver'
+                StringConfigItem:
+                    config_title: '默认图片服务器'
+                    config_key: 'pictureserver'
+                SelectConfigItem:
+                    config_title: '画质'
+                    config_options: ['low', 'medium', 'high', 'original']
+                    config_key: 'quality'

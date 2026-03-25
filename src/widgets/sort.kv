@@ -1,0 +1,10 @@
+#:kivy 2.3.0
+
+<SortButton>:
+    text: '排序方式：' + SortButton.SORT_DICT.get(self.value, '')
+    color: rgba('#ffffffff')
+
+<SortPopup>:
+    title: '排序方式'
+    size: dp(240), dp(200)
+    size_hint: None, None

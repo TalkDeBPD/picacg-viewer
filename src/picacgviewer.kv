@@ -1,0 +1,25 @@
+#:kivy 2.1.0
+#:import MyScreenManager screens.manager.MyScreenManager
+#:import ConfigScreen screens.configscreen.ConfigScreen
+#:import StartScreen screens.startscreen.StartScreen
+#:import CategoriesScreen screens.categoriesscreen.CategoriesScreen
+#:import SearchScreen screens.searchscreen.SearchScreen
+#:import InfoScreen screens.infoscreen.InfoScreen
+#:import ComicsScreen screens.comicsscreen.ComicsScreen
+#:import ReaderScreen screens.readerscreen.ReaderScreen
+
+MyScreenManager:
+    StartScreen:
+        name: 'start'
+    ConfigScreen:
+        name: 'config'
+    CategoriesScreen:
+        name: 'categories'
+    SearchScreen:
+        name: 'search'
+    InfoScreen:
+        name: 'info'
+    ComicsScreen:
+        name: 'comics'
+    ReaderScreen:
+        name: 'reader'

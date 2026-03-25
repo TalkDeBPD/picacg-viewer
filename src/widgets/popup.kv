@@ -1,0 +1,23 @@
+#:kivy 2.3.0
+
+<MessagePopup>:
+    size_hint_y: None
+    height: ct.height + dp(70)
+    BoxLayout:
+        id: ct
+        size_hint_y: None
+        height: self.minimum_height
+        orientation: 'vertical'
+        spacing: dp(4)
+        Label:
+            text: root.text
+            size_hint: 1, None
+            text_size: self.width, None
+            height: self.texture_size[1]
+            color: 1, 1, 1, 1
+        Button:
+            text: '确定'
+            size_hint_y: None
+            height: dp(30)
+            color: 1, 1, 1, 1
+            on_release: root.dismiss()

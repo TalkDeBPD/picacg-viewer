@@ -1,0 +1,88 @@
+#:kivy 2.3.0
+
+<ConfigPage>:
+    orientation: 'vertical'
+
+<ConfigItem>:
+    orientation: 'vertical'
+    size_hint_y: None
+    height: self.minimum_height
+    padding: dp(8), dp(8)
+    ripple_duration: 1.5
+    canvas.before:
+        Color:
+            rgba: root.background_color
+        Rectangle:
+            pos: self.pos
+            size: self.size
+    Label:
+        text: root.config_title
+        id: label
+        halign: 'left'
+        text_size: self.size
+        size_hint_y: None
+        height: dp(20)
+    TinyLabel:
+        text: str(root.config_value)
+        halign: 'left'
+        text_size: self.size
+        color: rgba('#00000099')
+        size_hint_y: None
+        height: dp(16)
+        shorten: True
+        shorten_from: 'right'
+
+<StringConfigPopup>:
+    size_hint: None, None
+    width: dp(240)
+    height: dp(130)
+    BoxLayout:
+        orientation: 'vertical'
+        size_hint_y: None
+        TextInput:
+            id: input
+            multiline: False
+            text: root.config_value
+            height: dp(30)
+            size_hint_y: None
+        BoxLayout:
+            height: dp(30)
+            size_hint_y: None
+            Button:
+                text: '确定'
+                size_hint_x: 0.5
+                on_release: root.confirm()
+                color: 1, 1, 1, 1
+            Button:
+                text: '取消'
+                size_hint_x: 0.5
+                on_release: root.dismiss()
+                color: 1, 1, 1, 1
+
+<SelectConfigPopup>:
+    size_hint: None, None
+    width: dp(240)
+    height: cont.height + dp(60)
+    BoxLayout:
+        id: cont
+        orientation: 'vertical'
+        size_hint_y: None
+        height: self.minimum_height
+        BoxLayout:
+            id: ops
+            orientation: 'vertical'
+            size_hint_y: None
+            height: self.minimum_height
+        BoxLayout:
+            height: dp(30)
+            size_hint_y: None
+            Button:
+                text: '确定'
+                size_hint_x: 0.5
+                on_release: root.confirm()
+                color: 1, 1, 1, 1
+            Button:
+                text: '取消'
+                size_hint_x: 0.5
+                on_release: root.dismiss()
+                color: 1, 1, 1, 1

@@ -1,0 +1,91 @@
+#:kivy 2.3.0
+#:import Header widgets.header.Header
+#:import RetryImage widgets.image.RetryImage
+
+<InfoScreen>:
+    BoxLayout:
+        orientation: 'vertical'
+        Header:
+            title: '漫画详情'
+        ScrollView:
+            do_scroll_x: False
+            BoxLayout:
+                orientation: 'vertical'
+                height: self.minimum_height
+                size_hint_y: None
+                spacing: dp(4)
+                RetryImage:
+                    id: image
+                    path: root.comic.thumb.path if hasattr(root.comic, 'thumb') else ''
+                    size_hint_y: None
+                    height: dp(240)
+                Label:
+                    size_hint_y: None
+                    text: getattr(root.comic, 'title', '')
+                    height: self.texture_size[1]
+                    text_size: self.width, None
+                    halign: 'center'
+                Link:
+                    size_hint_y: None
+                    text: getattr(root.comic, 'author', '')
+                    height: self.texture_size[1]
+                    text_size: self.width, None
+                    halign: 'center'
+                    color: rgba('#000000cc')
+                    on_release: hasattr(root.comic, 'author') and root.manager.screen_open('comics', ('a', root.comic.author, 'dd', 1))
+                Link:
+                    size_hint_y: None
+                    text: getattr(root.comic, 'chineseTeam', '')
+                    height: self.texture_size[1]
+                    text_size: self.width, None
+                    halign: 'center'
+                    color: rgba('#000000cc')
+                    on_release: hasattr(root.comic, 'chineseTeam') and root.manager.screen_open('comics', ('ct', root.comic.chineseTeam, 'dd', 1))
+                StackLayout:
+                    id: tags
+                    height: self.minimum_height
+                    size_hint_y: None
+                    spacing: dp(4)
+                Label:
+                    size_hint_y: None
+                    height: self.texture_size[1]
+                    text_size: self.width, None
+                    text: getattr(root.comic, 'description', '')
+                Button:
+                    text: '开始阅读'
+                    color: 1, 1, 1, 1
+                    on_release: hasattr(root.comic, 'id') and root.manager.screen_open('reader', (root.comic.id, 1, 1))
+                    size_hint_y: None
+                    height: dp(30)
+
+
+<CategoryLabel>:
+    padding: dp(6), dp(2)
+    size_hint: None, None
+    size: self.texture_size[0] + dp(12), self.texture_size[1] + dp(4)
+    canvas.before:
+        Color:
+            rgba: rgba('#ED97B7ff')
+        RoundedRectangle:
+            pos: self.pos
+            size: self.size
+            radius: [self.height / 2]
+    color: rgba('#ffffffff')
+
+<TagLabel>:
+    padding: dp(6), dp(2)
+    size_hint: None, None
+    size: self.texture_size[0] + dp(12), self.texture_size[1] + dp(4)
+    canvas.before:
+        Color:
+            rgba: rgba('#ffffffff')
+        RoundedRectangle:
+            pos: self.pos
+            size: self.size
+            radius: [self.height / 2]
+    color: rgba('#ED97B7ff')
+    canvas.after:
+        Color:
+            rgba: rgba('#ED97B7ff')
+        Line:
+            rounded_rectangle: [self.x, self.y, self.width, self.height, self.height / 2]

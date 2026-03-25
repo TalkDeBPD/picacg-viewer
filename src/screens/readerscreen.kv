@@ -1,0 +1,34 @@
+#:kivy 2.3.0
+#:import Header widgets.header.Header
+
+<ReaderScreen>:
+    BoxLayout:
+        orientation: 'vertical'
+        Header:
+            title: '阅读器'
+        BoxLayout:
+            size_hint_y: None
+            height: dp(30)
+            Button:
+                text: '上一页'
+                color: 1, 1, 1, 1
+                on_release: root.last()
+            Button:
+                text: '缩小'
+                color: 1, 1, 1, 1
+                on_release: root.scale -= 0.1 if root.scale > 1.0 else 0
+            Button:
+                text: '放大'
+                color: 1, 1, 1, 1
+                on_release: root.scale += 0.1 if root.scale < 3.0 else 0
+            Button:
+                text: '下一页'
+                color: 1, 1, 1, 1
+                on_release: root.next()
+        ScrollView:
+            BoxLayout:
+                id: docs
+                size_hint: None, None
+                orientation: 'vertical'
+                height: self.minimum_height
+                width: self.parent.width * root.scale

@@ -1,0 +1,40 @@
+#:kivy 2.3.0
+#:import Header widgets.header.Header
+
+<ComicsScreen>:
+    BoxLayout:
+        orientation: 'vertical'
+        Header:
+            title: root.KEYS.get(root.key, '') + '：' + root.value
+        ScrollView:
+            do_scroll_x: False
+            BoxLayout:
+                orientation: 'vertical'
+                height: self.minimum_height
+                size_hint_y: None
+                Button:
+                    size_hint_y: None
+                    height: dp(30)
+                    text: '刷新'
+                    color: rgba('#ffffffff')
+                    on_release: root.flush()
+                BoxLayout:
+                    size_hint_y: None
+                    height: dp(30)
+                    SortButton:
+                        id: sort
+                        size_hint_x: 2
+                    TextInput:
+                        id: page_index
+                        hint_text: '页码'
+                        input_filter: 'int'
+                        multiline: False
+                        text: '1'
+                    Label:
+                        text: '/' + str(root.ptotal)
+                        text_size: self.width - dp(8), None
+                BoxLayout:
+                    id: docs
+                    height: self.minimum_height
+                    size_hint_y: None
+                    orientation: 'vertical'
