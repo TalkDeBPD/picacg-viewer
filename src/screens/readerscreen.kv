@@ -1,27 +1,28 @@
 #:kivy 2.3.0
 #:import Header widgets.header.Header
+#:import RippleButton widgets.button.RippleButton
 
 <ReaderScreen>:
     BoxLayout:
         orientation: 'vertical'
         Header:
-            title: '阅读器'
+            title: '阅读：' + root.title
         BoxLayout:
             size_hint_y: None
             height: dp(30)
-            Button:
+            RippleButton:
                 text: '上一页'
                 color: 1, 1, 1, 1
                 on_release: root.last()
-            Button:
+            RippleButton:
                 text: '缩小'
                 color: 1, 1, 1, 1
                 on_release: root.scale -= 0.1 if root.scale > 1.0 else 0
-            Button:
+            RippleButton:
                 text: '放大'
                 color: 1, 1, 1, 1
                 on_release: root.scale += 0.1 if root.scale < 3.0 else 0
-            Button:
+            RippleButton:
                 text: '下一页'
                 color: 1, 1, 1, 1
                 on_release: root.next()

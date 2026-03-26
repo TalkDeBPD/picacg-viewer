@@ -1,4 +1,5 @@
-#:kivy 2.3.0
+#:kivy 2.0.0
+#:import RippleButton widgets.button.RippleButton
 
 <StartScreen>:
     BoxLayout:
@@ -11,12 +12,12 @@
         Label:
             text: 'Developed by TalkDe'
             font_size: dp(16)
-        Button:
+        RippleButton:
             text: '编辑配置'
             on_release: root.manager.screen_open('config')
             color: 1, 1, 1, 1
             font_size: dp(24)
-        Button:
+        RippleButton:
             text: '进入！'
             on_release: root.sign_in()
             color: 1, 1, 1, 1

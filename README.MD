@@ -4,6 +4,8 @@
 
 使用Python，基于[Kivy](https://github.com/kivy/kivy)，并使用本人的[picaapi](https://github.com/TalkDeBPD/picaapi)库，开发的哔咔漫画客户端。
 
+作者计划择机将全部项目改用Java/Kotlin开发。
+
 ## 功能
 
 - [x] 自动登录

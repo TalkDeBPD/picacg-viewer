@@ -1,0 +1,22 @@
+#:kivy 2.0.0
+
+<RippleButton>:
+    canvas.before:
+        Color:
+            rgba: root.now_background_color
+        RoundedRectangle:
+            pos: root.pos
+            size: root.size
+            radius: [root.radius]
+    color: 1, 1, 1, 1
+
+<SortButton>:
+    text: '排序方式：' + SortButton.SORT_DICT.get(self.value, '')
+
+<SortPopup>:
+    title: '排序方式'
+    size: dp(240), dp(200)
+    size_hint: None, None
+    BoxLayout:
+        id: ct
+        orientation: 'vertical'

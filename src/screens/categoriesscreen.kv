@@ -1,5 +1,6 @@
-#:kivy 2.3.0
+#:kivy 2.0.0
 #:import RetryImage widgets.image.RetryImage
+#:import RippleButton widgets.button.RippleButton
 
 <CategoriesScreen>:
     BoxLayout:
@@ -7,7 +8,7 @@
         BoxLayout:
             size_hint_y: None
             height: dp(48)
-            Button:
+            RippleButton:
                 text: '用户'
                 size_hint_x: 1
                 font_size: dp(28)
@@ -15,7 +16,7 @@
             Label:
                 text: ''
                 size_hint_x: 3
-            Button:
+            RippleButton:
                 size_hint_x: 1
                 text: '搜索'
                 font_size: dp(28)

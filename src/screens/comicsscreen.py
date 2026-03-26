@@ -1,12 +1,9 @@
 import asyncio
-
 from httpx import HTTPError
 from kivy.app import App
 from kivy.lang import Builder
 from kivy.properties import StringProperty, NumericProperty
-
 from picaapi.client import Client as PicaClient
-
 from screens.manager import ReuseScreen
 from widgets.comicitem import ComicItem
 

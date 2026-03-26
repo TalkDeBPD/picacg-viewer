@@ -1,11 +1,14 @@
+#:kivy 2.0.0
+#import RippleButton widgets.button.RippleButton
+
 <Header>:
     orientation: 'horizontal'
     height: dp(56)
     size_hint_y: None
-    Button:
+    RippleButton:
         id: back_but
         text: '←'
-        font_size: '42sp'
+        font_size: '36sp'
         size_hint_x: None
         width: dp(56)
         on_release: app.root.screen_back()

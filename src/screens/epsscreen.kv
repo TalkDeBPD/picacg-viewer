@@ -5,4 +5,32 @@
     BoxLayout:
         orientation: 'vertical'
         Header:
-            title: ''
+            title: '各话列表'
+        ScrollView:
+            do_scroll_x: False
+            GridLayout:
+                id: grid
+                cols: 4
+                padding: dp(8)
+                spacing: dp(8)
+                height: self.minimum_height
+
+<EpsButton>:
+    canvas.before:
+        Color:
+            rgba: 1, 1, 1, 1
+        RoundedRectangle:
+            size: root.size
+            pos: root.pos
+            radius: [dp(6)]
+    height: self.width * 0.75
+    font_size: dp(12)
+    size_hint_y: None
+    text_size: self.width, None
+    halign: 'center'
+    canvas.after:
+        Color:
+            rgba: rgba('#ED97B7ff')
+        Line:
+            rounded_rectangle: [self.x, self.y, self.width, self.height, dp(6)]
+            width: dp(1)

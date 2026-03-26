@@ -14,8 +14,8 @@ from kivy.uix.label import Label
 from picaapi.downloader import PictureClient
 
 
-async def load_texture(path, max_tries: int = 3):
-    data = Cache.get('images', path)
+async def load_texture(category, path, max_tries: int = 3):
+    data = Cache.get(category, path)
 
     if data is None:
         picture_client = App.get_running_app().picture_client
@@ -23,14 +23,14 @@ async def load_texture(path, max_tries: int = 3):
         for i in range(max_tries):
             try:
                 data = await picture_client.fetch(path)
-                Cache.append('images', path, data)
+                Cache.append(category, path, data)
                 return CoreImage(io.BytesIO(data), ext='jpg').texture
             except HTTPError:
                 if i + 1 == max_tries:
                     raise
         return None
     else:
-        Cache.append('images', path, data)
+        Cache.append(category, path, data)
         return CoreImage(io.BytesIO(data), ext='jpg').texture
 
 
@@ -48,7 +48,7 @@ class RetryImage(BoxLayout):
         label.bind(size=label.setter('text_size'))
         self.add_widget(label)
         try:
-            texture = await load_texture(self.path, max_tries=self.max_tries)
+            texture = await load_texture('images', self.path, max_tries=self.max_tries)
             image = Image(texture=texture, fit_mode=self.fit_mode)
             self.clear_widgets()
             self.add_widget(image)
@@ -76,7 +76,7 @@ class ComicImage(BoxLayout):
         label.bind(width=self.setter('height'))
         self.add_widget(label)
         try:
-            texture = await load_texture(self.path, max_tries=self.max_tries)
+            texture = await load_texture('comic_images', self.path, max_tries=self.max_tries)
             image = Image(texture=texture, size_hint=(1, None), keep_ratio=True, fit_mode='cover')
             image.bind(image_ratio=ComicImage.set_height, width=ComicImage.set_height)
             self.clear_widgets()

@@ -57,6 +57,12 @@
                     on_release: hasattr(root.comic, 'id') and root.manager.screen_open('reader', (root.comic.id, 1, 1))
                     size_hint_y: None
                     height: dp(30)
+                Button:
+                    text: '各话列表' + f'({root.comic.epsCount})' if hasattr(root.comic, 'epsCount') else ''
+                    color: 1, 1, 1, 1
+                    on_release: hasattr(root.comic, 'id') and root.manager.screen_open('eps', (root.comic.id,))
+                    size_hint_y: None
+                    height: dp(30)
 
 
 <CategoryLabel>:

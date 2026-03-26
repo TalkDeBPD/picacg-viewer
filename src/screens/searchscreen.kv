@@ -1,6 +1,7 @@
-#:kivy 2.3.0
+#:kivy 2.0.0
 #:import Header widgets.header.Header
-#:import SortButton widgets.sort.SortButton
+#:import RippleButton widgets.button.RippleButton
+#:import SortButton widgets.button.SortButton
 
 <SearchScreen>:
     BoxLayout:
@@ -18,14 +19,12 @@
                     height: dp(30)
                     TextInput:
                         id: keyword
+                        size_hint_x: 4
                         multiline: False
                         hint_text: '搜索关键字……'
-                    Button:
+                    RippleButton:
                         text: '搜索'
-                        size_hint_x: None
-                        width: dp(40)
                         on_release: root.on_search()
-                        color: '#ffffffff'
                 BoxLayout:
                     size_hint_y: None
                     height: dp(30)
@@ -44,13 +43,11 @@
                 BoxLayout:
                     size_hint_y: None
                     height: dp(30)
-                    Button:
+                    RippleButton:
                         text: '上一页'
-                        color: 1, 1, 1, 1
                         on_release: root.last()
-                    Button:
+                    RippleButton:
                         text: '下一页'
-                        color: 1, 1, 1, 1
                         on_release: root.next()
                 BoxLayout:
                     id: docs
@@ -60,11 +57,9 @@
                 BoxLayout:
                     size_hint_y: None
                     height: dp(30)
-                    Button:
+                    RippleButton:
                         text: '上一页'
-                        color: 1, 1, 1, 1
                         on_release: root.last()
-                    Button:
+                    RippleButton:
                         text: '下一页'
-                        color: 1, 1, 1, 1
                         on_release: root.next()

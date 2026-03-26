@@ -30,5 +30,6 @@ if __name__ == '__main__':
         )
         Window.size = (360, 640)
     Cache.register('images', 64, 300)
+    Cache.register('comic_images', 32, 300)
     Builder.load_file('styles.kv')
     asyncio.run(PicacgViewerApp().async_run('asyncio'))

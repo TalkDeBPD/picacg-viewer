@@ -33,27 +33,6 @@ class ConfigItem(TouchRippleButtonBehavior, BoxLayout):
     config_key = StringProperty()
     config_value = StringProperty()
     background_color = ListProperty([0, 0, 0, 0])
-    isPressed = False
-
-    def on_touch_down(self, touch):
-        collide_point = self.collide_point(touch.x, touch.y)
-        if collide_point:
-            touch.grab(self)
-            self.background_color = [0, 0, 0, 0.25]
-            self.ripple_show(touch)
-            self.isPressed = True
-            return super().on_touch_down(touch)
-        return False
-
-    def on_touch_up(self, touch):
-        if touch.grab_current is self and self.isPressed:
-            touch.ungrab(self)
-            self.background_color = [0, 0, 0, 0]
-            self.ripple_fade()
-            self.isPressed = False
-            return super().on_touch_up(touch)
-        return False
-
     def put(self):
         if isinstance(self.parent, ConfigPage):
             self.parent.put(self.config_key, self.config_value)

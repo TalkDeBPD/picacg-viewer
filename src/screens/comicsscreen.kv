@@ -1,5 +1,7 @@
-#:kivy 2.3.0
+#:kivy 2.0.0
 #:import Header widgets.header.Header
+#:import RippleButton widgets.button.RippleButton
+#:import SortButton widgets.button.SortButton
 
 <ComicsScreen>:
     BoxLayout:
@@ -12,11 +14,10 @@
                 orientation: 'vertical'
                 height: self.minimum_height
                 size_hint_y: None
-                Button:
+                RippleButton:
                     size_hint_y: None
                     height: dp(30)
                     text: '刷新'
-                    color: rgba('#ffffffff')
                     on_release: root.flush()
                 BoxLayout:
                     size_hint_y: None
@@ -38,3 +39,8 @@
                     height: self.minimum_height
                     size_hint_y: None
                     orientation: 'vertical'
+                BoxLayout:
+                    height: dp(30)
+                    size_hint_y: None
+                    RippleButton:
+                        text: 'Hello'
