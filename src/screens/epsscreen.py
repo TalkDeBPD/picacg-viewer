@@ -7,6 +7,7 @@ from kivy.uix.behaviors import ButtonBehavior
 from kivy.uix.label import Label
 from kivy.uix.widget import Widget
 from picaapi.client import Client as PicaClient
+from util import format_http_error
 from screens.manager import ReuseScreen, MyScreenManager
 from widgets.popup import MessagePopup
 
@@ -21,20 +22,20 @@ class EpsScreen(ReuseScreen):
         asyncio.create_task(self.async_load())
 
     async def async_load(self):
-        if self.comic_id in self.cache:
-            self.eps = self.cache[self.comic_id]
-        else:
-            api_client = App.get_running_app().api_client
-            assert isinstance(api_client, PicaClient)
-            async def retry_get_page(page):
-                for i in range(3):
-                    try:
-                        return await api_client.eps(self.comic_id, page)
-                    except HTTPError:
-                        if i == 2:
-                            raise
-                return None
-            try:
+        try:
+            if self.comic_id in self.cache:
+                self.eps = self.cache[self.comic_id]
+            else:
+                api_client = App.get_running_app().api_client
+                assert isinstance(api_client, PicaClient)
+                async def retry_get_page(page):
+                    for i in range(3):
+                        try:
+                            return await api_client.eps(self.comic_id, page)
+                        except HTTPError:
+                            if i == 2:
+                                raise
+                    return None
                 p1 = await retry_get_page(1)
                 assert p1 is not None
                 tasks = [retry_get_page(i) for i in range(2, p1.pages + 1)]
@@ -42,17 +43,15 @@ class EpsScreen(ReuseScreen):
                 self.eps = p1.docs
                 for r in rslt:
                     self.eps += r.docs
-            except HTTPError as e:
-                MessagePopup(title='网络错误', text=f'{type(e).__name__}:{e}').open()
-                return
-
-        self.ids.grid.clear_widgets()
-        for i in self.eps:
-            eb = EpsButton(comic_id=self.comic_id, order=i.order, text=i.title)
-            self.ids.grid.add_widget(eb)
-        if len(self.eps) < 4:
-            for i in range(4 - len(self.eps)):
-                self.ids.grid.add_widget(Widget(size_hint_y=None))
+            self.ids.grid.clear_widgets()
+            for i in self.eps:
+                eb = EpsButton(comic_id=self.comic_id, order=i.order, text=i.title)
+                self.ids.grid.add_widget(eb)
+            if len(self.eps) < 4:
+                for i in range(4 - len(self.eps)):
+                    self.ids.grid.add_widget(Widget(size_hint_y=None))
+        except HTTPError as e:
+            MessagePopup(text=format_http_error(e), title='错误').open()
 
     def save_content(self) -> tuple:
         if self.comic_id and self.comic_id not in self.cache:

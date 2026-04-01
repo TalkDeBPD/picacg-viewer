@@ -1,4 +1,4 @@
-#:kivy 2.3.0
+#:kivy 2.0.0
 #:import Header widgets.header.Header
 #:import RippleButton widgets.button.RippleButton
 
@@ -13,7 +13,7 @@
             RippleButton:
                 text: '上一页'
                 color: 1, 1, 1, 1
-                on_release: root.last()
+                on_release: root.prev_page()
             RippleButton:
                 text: '缩小'
                 color: 1, 1, 1, 1
@@ -25,8 +25,10 @@
             RippleButton:
                 text: '下一页'
                 color: 1, 1, 1, 1
-                on_release: root.next()
+                on_release: root.next_page()
         ScrollView:
+            bar_width: dp(12)
+            scroll_type: ['bars', 'content']
             BoxLayout:
                 id: docs
                 size_hint: None, None

@@ -1,6 +1,6 @@
 from kivy.animation import Animation
 from kivy.lang import Builder
-from kivy.properties import ListProperty, NumericProperty, StringProperty
+from kivy.properties import NumericProperty, StringProperty, ColorProperty
 from kivy.metrics import dp
 from kivy.uix.boxlayout import BoxLayout
 from kivy.uix.checkbox import CheckBox
@@ -11,9 +11,9 @@ from kivy.utils import rgba
 
 
 class RippleButton(TouchRippleButtonBehavior, Label):
-    background_color = ListProperty(rgba('#ED97B7ff'))
-    now_background_color = ListProperty([])
-    press_background_color = ListProperty(rgba('#E04D83FF'))
+    background_color = ColorProperty(rgba('#ED97B7ff'))
+    now_background_color = ColorProperty(rgba('#ED97B7ff'))
+    press_background_color = ColorProperty(rgba('#E04D83FF'))
     background_color_duration = NumericProperty(0.05)
     radius = NumericProperty(0)
 

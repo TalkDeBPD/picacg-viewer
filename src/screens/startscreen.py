@@ -2,10 +2,10 @@ import asyncio
 from httpx import HTTPError
 from kivy.app import App
 from kivy.lang import Builder
-
 from picaapi.client import Client as PicaClient
 from picaapi.error import PicaAPIError
 from picaapi.downloader import PictureClient, DEFAULT_PICTURE_SERVER
+from util import format_http_error
 from screens.manager import ReuseScreen
 from widgets.popup import MessagePopup
 
@@ -45,7 +45,7 @@ class StartScreen(ReuseScreen):
             if flag:
                 self.manager.screen_open_start('categories')
         except HTTPError as e:
-            MessagePopup(text=f'网络异常！\n{type(e).__name__}: {str(e)}', title='错误').open()
+            MessagePopup(text=format_http_error(e), title='错误').open()
         except PicaAPIError:
             MessagePopup(text='请检查你的用户名/邮箱及密码是否设置正确！', title='错误').open()
         finally:

@@ -1,0 +1,66 @@
+#:kivy 2.0.0
+#:import RetryImage widgets.image.RetryImage
+#:import format_time util.format_time
+
+<CommentItem>:
+    size_hint_y: None
+    height: right.height
+    BoxLayout:
+        orientation: 'vertical'
+        size_hint: None, None
+        width: dp(60)
+        height: right.height
+        RetryImage:
+            id: image
+            path: hasattr(root.comment, 'user') and ('' if root.comment.user.avatar is None else root.comment.user.avatar.path)
+            size_hint: None, None
+            size: dp(60), dp(60)
+        Widget:
+    BoxLayout:
+        id: right
+        orientation: 'vertical'
+        height: self.minimum_height
+        size_hint_y: None
+        Label:
+            text: hasattr(root.comment, 'user') and root.comment.user.name
+            size_hint_y: None
+            text_size: self.width, None
+            height: self.texture_size[1]
+            bold: True
+            halign: 'left'
+        Label:
+            text: hasattr(root.comment, 'created_at') and format_time(root.comment.created_at)
+            font_size: sp(12)
+            size_hint_y: None
+            text_size: self.width, None
+            height: self.texture_size[1]
+            halign: 'left'
+            color: 0.3, 0.3, 0.3, 1
+        Label:
+            text: getattr(root.comment, 'content', '')
+            size_hint_y: None
+            text_size: self.width, None
+            height: self.texture_size[1]
+            halign: 'left'
+        BoxLayout:
+            size_hint_y: None
+            height: self.minimum_height
+            Label:
+                text: '喜欢：' + str(getattr(root.comment, 'likes', 0))
+                font_size: sp(12)
+                size_hint_y: None
+                text_size: self.width, None
+                height: self.texture_size[1]
+                shorten: True
+                shorten_from: 'right'
+                halign: 'left'
+            Link:
+                text: '评论：' + str(getattr(root.comment, 'comments', 0))
+                font_size: sp(12)
+                size_hint_y: None
+                text_size: self.width, None
+                height: self.texture_size[1]
+                shorten: True
+                shorten_from: 'right'
+                halign: 'left'
+        Widget:

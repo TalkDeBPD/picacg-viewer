@@ -1,8 +1,6 @@
 import asyncio
 import io
-
 from httpx import HTTPError
-
 from kivy.app import App
 from kivy.cache import Cache
 from kivy.core.image import Image as CoreImage
@@ -10,7 +8,6 @@ from kivy.uix.image import Image
 from kivy.properties import NumericProperty, StringProperty
 from kivy.uix.boxlayout import BoxLayout
 from kivy.uix.label import Label
-
 from picaapi.downloader import PictureClient
 
 
@@ -43,6 +40,8 @@ class RetryImage(BoxLayout):
         asyncio.create_task(self.async_load())
 
     async def async_load(self):
+        if not self.path:
+            return
         self.clear_widgets()
         label = Label(text='Loading...', valign='center', halign='center')
         label.bind(size=label.setter('text_size'))
@@ -53,7 +52,8 @@ class RetryImage(BoxLayout):
             self.clear_widgets()
             self.add_widget(image)
         except HTTPError as e:
-            label.text = f'{type(e)}: {e}'
+            self.clear_widgets()
+            self.add_widget(Image(source='img/placeholder.jpg', fit_mode=self.fit_mode))
 
 
 class ComicImage(BoxLayout):
@@ -70,6 +70,8 @@ class ComicImage(BoxLayout):
         asyncio.create_task(self.async_load())
 
     async def async_load(self):
+        if not self.path:
+            return
         self._lock = True
         self.clear_widgets()
         label = Label(text='Loading...')

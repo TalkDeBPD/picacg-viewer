@@ -1,7 +1,7 @@
 [app]
 
 # (str) Title of your application
-title = Pica Viewer
+title = PicACG Viewer
 
 # (str) Package name
 package.name = picaviewer

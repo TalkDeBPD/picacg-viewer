@@ -1,39 +1,18 @@
 #:kivy 2.0.0
 #:import Header widgets.header.Header
 #:import RippleButton widgets.button.RippleButton
-#:import SortButton widgets.button.SortButton
 
-<ComicsScreen>:
+<CommentsScreen>:
     BoxLayout:
         orientation: 'vertical'
         Header:
-            title: root.KEYS.get(root.key, '') + '：' + root.value
+            title: '评论区'
         ScrollView:
             do_scroll_x: False
             BoxLayout:
                 orientation: 'vertical'
-                height: self.minimum_height
                 size_hint_y: None
-                RippleButton:
-                    size_hint_y: None
-                    height: dp(30)
-                    text: '刷新'
-                    on_release: root.flush()
-                BoxLayout:
-                    size_hint_y: None
-                    height: dp(30)
-                    SortButton:
-                        id: sort
-                        size_hint_x: 2
-                    TextInput:
-                        id: page_index
-                        hint_text: '页码'
-                        input_filter: 'int'
-                        multiline: False
-                        text: '1'
-                    Label:
-                        text: '/' + str(root.ptotal)
-                        text_size: self.width - dp(8), None
+                height: self.minimum_height
                 BoxLayout:
                     size_hint_y: None
                     height: dp(30)
@@ -45,8 +24,8 @@
                         on_release: root.next_page()
                 BoxLayout:
                     id: docs
-                    height: self.minimum_height
                     size_hint_y: None
+                    height: self.minimum_height
                     orientation: 'vertical'
                 BoxLayout:
                     size_hint_y: None

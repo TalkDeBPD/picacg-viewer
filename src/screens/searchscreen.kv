@@ -19,7 +19,7 @@
                     height: dp(30)
                     TextInput:
                         id: keyword
-                        size_hint_x: 4
+                        size_hint_x: 3
                         multiline: False
                         hint_text: '搜索关键字……'
                     RippleButton:
@@ -45,10 +45,10 @@
                     height: dp(30)
                     RippleButton:
                         text: '上一页'
-                        on_release: root.last()
+                        on_release: root.prev_page()
                     RippleButton:
                         text: '下一页'
-                        on_release: root.next()
+                        on_release: root.next_page()
                 BoxLayout:
                     id: docs
                     height: self.minimum_height
@@ -59,7 +59,7 @@
                     height: dp(30)
                     RippleButton:
                         text: '上一页'
-                        on_release: root.last()
+                        on_release: root.prev_page()
                     RippleButton:
                         text: '下一页'
-                        on_release: root.next()
+                        on_release: root.next_page()

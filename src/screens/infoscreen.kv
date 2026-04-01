@@ -63,6 +63,12 @@
                     on_release: hasattr(root.comic, 'id') and root.manager.screen_open('eps', (root.comic.id,))
                     size_hint_y: None
                     height: dp(30)
+                Button:
+                    text: '评论' + f'({root.comic.comments})' if hasattr(root.comic, 'comments') else ''
+                    color: 1, 1, 1, 1
+                    on_release: hasattr(root.comic, 'id') and root.manager.screen_open('comments', (root.comic.id, 1))
+                    size_hint_y: None
+                    height: dp(30)
 
 
 <CategoryLabel>:

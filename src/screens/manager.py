@@ -1,5 +1,6 @@
 from kivy.app import App
 from kivy.core.window import Window
+from kivy.properties import NumericProperty
 from kivy.uix.screenmanager import ScreenManager, CardTransition, Screen
 
 
@@ -53,3 +54,20 @@ class ReuseScreen(Screen):
     def load_content(self, args: tuple):
         pass
 
+
+class PageScreen(ReuseScreen):
+    pindex = NumericProperty(1)
+    ptotal = NumericProperty(0)
+
+    def load_page(self):
+        pass
+
+    def next_page(self):
+        if self.pindex < self.ptotal:
+            self.pindex += 1
+            self.load_page()
+
+    def prev_page(self):
+        if self.pindex > 1:
+            self.pindex -= 1
+            self.load_page()

@@ -20,14 +20,14 @@ class PicacgViewerApp(App):
 
 
 if __name__ == '__main__':
+    # 重置字体
+    LabelBase.register(
+        name='Roboto',
+        fn_regular='./fonts/SourceHanSansCN-Regular.otf',
+        fn_bold='./fonts/SourceHanSansCN-Bold.otf'
+    )
     # 测试以适配手机
     if platform != 'android' and platform != 'ios':
-        # 重置字体
-        LabelBase.register(
-            name='Roboto',
-            fn_regular='./fonts/SourceHanSansCN-Regular.otf',
-            fn_bold='./fonts/SourceHanSansCN-Bold.otf'
-        )
         Window.size = (360, 640)
     Cache.register('images', 64, 300)
     Cache.register('comic_images', 32, 300)
