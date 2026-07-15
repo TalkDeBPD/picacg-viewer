@@ -25,9 +25,18 @@
         ScrollView:
             id: scroll
             do_scroll_x: False
-            Label:
-                id: def_label
-                text: '别着急嘛~'
+            GridLayout:
+                id: gl
+                cols: 3
+                size_hint_y: None
+                spacing: dp(8), dp(8)
+                padding: dp(8), dp(8)
+                height: self.minimum_height
+                CategoryItem:
+                    image_path: 'https://manhuabika.com/assets/cat_leaderboard-BMq1VNlO.jpg'
+                    text: '哔咔排行榜'
+                    isWeb: True
+                    on_release: root.manager.screen_open('rank')
 
 <CategoryItem>:
     orientation: 'vertical'

@@ -1,5 +1,4 @@
 import asyncio
-import traceback
 from httpx import HTTPError
 from kivy.lang import Builder
 from kivy.app import App
@@ -9,7 +8,9 @@ from kivy.uix.behaviors import ButtonBehavior
 from kivy.uix.boxlayout import BoxLayout
 from kivy.uix.gridlayout import GridLayout
 from picaapi.client import Client as PicaClient
+from util import format_http_error
 from screens.manager import ReuseScreen
+from widgets.popup import MessagePopup
 
 
 class CategoriesScreen(ReuseScreen):
@@ -32,21 +33,19 @@ class CategoriesScreen(ReuseScreen):
             try:
                 categories = await app.api_client.categories()
                 break
-            except HTTPError:
+            except HTTPError as e:
                 if i == 2:
-                    self.ids.def_label.text = traceback.format_exc()
+                    MessagePopup(text=format_http_error(e), title='错误').open()
                     return
         if categories is None:
             return
 
-        gird = GridLayout(cols=3, size_hint_y=None, spacing=[dp(8), dp(8)], padding=[dp(8), dp(8)])
-        gird.bind(minimum_height=gird.setter('height'))
-        self.ids.scroll.clear_widgets()
-        self.ids.scroll.add_widget(gird)
+        for i in self.ids.gl.children:
+            if isinstance(i, CategoryItem): i.load()
         for i in categories:
             image = CategoryItem(text=i.title, image_path=i.thumb.path, isWeb=i.isWeb, link=('' if i.link is None else i.link))
             image.load()
-            gird.add_widget(image)
+            self.ids.gl.add_widget(image)
 
     def open_search(self):
         self.manager.screen_open('search')
