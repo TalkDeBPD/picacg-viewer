@@ -8,58 +8,45 @@
         orientation: 'vertical'
         Header:
             title: '高级搜索'
+        BoxLayout:
+            size_hint_y: None
+            height: dp(30)
+            TextInput:
+                id: keyword
+                size_hint_x: 3
+                multiline: False
+                hint_text: '搜索关键字……'
+            RippleButton:
+                text: '搜索'
+                on_release: root.on_search()
+        BoxLayout:
+            size_hint_y: None
+            height: dp(30)
+            SortButton:
+                id: sort
+                size_hint_x: 2
+            TextInput:
+                id: page_index
+                hint_text: '页码'
+                input_filter: 'int'
+                multiline: False
+                text: '1'
+            Label:
+                text: '/' + str(root.ptotal)
+                text_size: self.width - dp(8), None
+        BoxLayout:
+            size_hint_y: None
+            height: dp(30)
+            RippleButton:
+                text: '上一页'
+                on_release: root.prev_page()
+            RippleButton:
+                text: '下一页'
+                on_release: root.next_page()
         ScrollView:
             do_scroll_x: False
             BoxLayout:
-                orientation: 'vertical'
+                id: docs
                 height: self.minimum_height
                 size_hint_y: None
-                BoxLayout:
-                    size_hint_y: None
-                    height: dp(30)
-                    TextInput:
-                        id: keyword
-                        size_hint_x: 3
-                        multiline: False
-                        hint_text: '搜索关键字……'
-                    RippleButton:
-                        text: '搜索'
-                        on_release: root.on_search()
-                BoxLayout:
-                    size_hint_y: None
-                    height: dp(30)
-                    SortButton:
-                        id: sort
-                        size_hint_x: 2
-                    TextInput:
-                        id: page_index
-                        hint_text: '页码'
-                        input_filter: 'int'
-                        multiline: False
-                        text: '1'
-                    Label:
-                        text: '/' + str(root.ptotal)
-                        text_size: self.width - dp(8), None
-                BoxLayout:
-                    size_hint_y: None
-                    height: dp(30)
-                    RippleButton:
-                        text: '上一页'
-                        on_release: root.prev_page()
-                    RippleButton:
-                        text: '下一页'
-                        on_release: root.next_page()
-                BoxLayout:
-                    id: docs
-                    height: self.minimum_height
-                    size_hint_y: None
-                    orientation: 'vertical'
-                BoxLayout:
-                    size_hint_y: None
-                    height: dp(30)
-                    RippleButton:
-                        text: '上一页'
-                        on_release: root.prev_page()
-                    RippleButton:
-                        text: '下一页'
-                        on_release: root.next_page()
+                orientation: 'vertical'

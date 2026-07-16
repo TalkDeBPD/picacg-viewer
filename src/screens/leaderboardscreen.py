@@ -9,13 +9,13 @@ from screens.manager import ReuseScreen
 from widgets.comicitem import ComicItem
 from widgets.popup import MessagePopup
 
-class RankScreen(ReuseScreen):
+class LeaderBoardScreen(ReuseScreen):
     docs = [[], [], []]
     txts = ListProperty([ '日排行', '周排行', '月排行' ])
     rid = NumericProperty(0)
 
     def __init__(self, **kwargs):
-        super(RankScreen, self).__init__(**kwargs)
+        super(LeaderBoardScreen, self).__init__(**kwargs)
         self.bind(rid=self.rid_changed)
 
     def load_content(self, args):
@@ -51,4 +51,4 @@ class RankScreen(ReuseScreen):
             self.ids.docs.add_widget(item)
 
 
-Builder.load_file('screens/rankscreen.kv')
+Builder.load_file('screens/leaderboardscreen.kv')

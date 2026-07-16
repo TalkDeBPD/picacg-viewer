@@ -2,11 +2,9 @@ import asyncio
 from httpx import HTTPError
 from kivy.lang import Builder
 from kivy.app import App
-from kivy.metrics import dp
 from kivy.properties import StringProperty, BooleanProperty, ObjectProperty
 from kivy.uix.behaviors import ButtonBehavior
 from kivy.uix.boxlayout import BoxLayout
-from kivy.uix.gridlayout import GridLayout
 from picaapi.client import Client as PicaClient
 from util import format_http_error
 from screens.manager import ReuseScreen
