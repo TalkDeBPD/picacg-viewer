@@ -1,6 +1,7 @@
 #:kivy 2.3.0
 #:import Header widgets.header.Header
 #:import RetryImage widgets.image.RetryImage
+#:import RippleButton widgets.button.RippleButton
 
 <InfoScreen>:
     BoxLayout:
@@ -51,19 +52,19 @@
                     height: self.texture_size[1]
                     text_size: self.width, None
                     text: getattr(root.comic, 'description', '')
-                Button:
+                RippleButton:
                     text: '开始阅读'
                     color: 1, 1, 1, 1
                     on_release: hasattr(root.comic, 'id') and root.manager.screen_open('reader', (root.comic.id, 1, 1))
                     size_hint_y: None
                     height: dp(30)
-                Button:
+                RippleButton:
                     text: '各话列表' + f'({root.comic.epsCount})' if hasattr(root.comic, 'epsCount') else ''
                     color: 1, 1, 1, 1
                     on_release: hasattr(root.comic, 'id') and root.manager.screen_open('eps', (root.comic.id,))
                     size_hint_y: None
                     height: dp(30)
-                Button:
+                RippleButton:
                     text: '评论' + f'({root.comic.comments})' if hasattr(root.comic, 'comments') else ''
                     color: 1, 1, 1, 1
                     on_release: hasattr(root.comic, 'id') and root.manager.screen_open('comments', (root.comic.id, 1))

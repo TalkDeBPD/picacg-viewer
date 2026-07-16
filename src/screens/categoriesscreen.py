@@ -3,7 +3,7 @@ from httpx import HTTPError
 from kivy.lang import Builder
 from kivy.app import App
 from kivy.metrics import dp
-from kivy.properties import StringProperty, BooleanProperty
+from kivy.properties import StringProperty, BooleanProperty, ObjectProperty
 from kivy.uix.behaviors import ButtonBehavior
 from kivy.uix.boxlayout import BoxLayout
 from kivy.uix.gridlayout import GridLayout
@@ -43,7 +43,7 @@ class CategoriesScreen(ReuseScreen):
         for i in self.ids.gl.children:
             if isinstance(i, CategoryItem): i.load()
         for i in categories:
-            image = CategoryItem(text=i.title, image_path=i.thumb.path, isWeb=i.isWeb, link=('' if i.link is None else i.link))
+            image = CategoryItem(text=i.title, image_path=i.thumb.path, is_web=i.isWeb, link=('' if i.link is None else i.link))
             image.load()
             self.ids.gl.add_widget(image)
 
@@ -54,14 +54,16 @@ class CategoriesScreen(ReuseScreen):
 class CategoryItem(ButtonBehavior, BoxLayout):
     text = StringProperty()
     image_path = StringProperty()
-    isWeb = BooleanProperty(False)
+    img_saved = BooleanProperty(False)
+    image = ObjectProperty(None)
+    is_web = BooleanProperty(False)
     link = StringProperty()
 
     def load(self):
         self.ids.image.load()
 
     def on_release(self):
-        if self.isWeb:
+        if self.is_web:
             pass
         else:
             App.get_running_app().root.screen_open('comics', ('c', self.text, 'dd', 1))

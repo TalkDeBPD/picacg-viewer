@@ -5,7 +5,7 @@ from kivy.app import App
 from kivy.cache import Cache
 from kivy.core.image import Image as CoreImage
 from kivy.uix.image import Image
-from kivy.properties import NumericProperty, StringProperty
+from kivy.properties import NumericProperty, StringProperty, BooleanProperty
 from kivy.uix.boxlayout import BoxLayout
 from kivy.uix.label import Label
 from picaapi.downloader import PictureClient
@@ -35,6 +35,7 @@ class RetryImage(BoxLayout):
     max_tries = NumericProperty(3)
     path = StringProperty()
     fit_mode = StringProperty('contain')
+    saved = BooleanProperty(False)
 
     def load(self):
         asyncio.create_task(self.async_load())
@@ -47,8 +48,11 @@ class RetryImage(BoxLayout):
         label.bind(size=label.setter('text_size'))
         self.add_widget(label)
         try:
-            texture = await load_texture('images', self.path, max_tries=self.max_tries)
-            image = Image(texture=texture, fit_mode=self.fit_mode)
+            if self.saved:
+                image = Image(source=self.path, fit_mode=self.fit_mode)
+            else:
+                texture = await load_texture('images', self.path, max_tries=self.max_tries)
+                image = Image(texture=texture, fit_mode=self.fit_mode)
             self.clear_widgets()
             self.add_widget(image)
         except HTTPError as e:

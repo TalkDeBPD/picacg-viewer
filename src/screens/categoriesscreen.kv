@@ -33,9 +33,10 @@
                 padding: dp(8), dp(8)
                 height: self.minimum_height
                 CategoryItem:
-                    image_path: 'https://manhuabika.com/assets/cat_leaderboard-BMq1VNlO.jpg'
+                    image_path: 'img/leaderboard.jpg'
                     text: '哔咔排行榜'
-                    isWeb: True
+                    is_web: True
+                    img_saved: True
                     on_release: root.manager.screen_open('rank')
 
 <CategoryItem>:
@@ -46,6 +47,7 @@
         size_hint: 1, None
         id: image
         path: root.image_path
+        saved: root.img_saved
         height: self.width
     Label:
         size_hint_y: None
