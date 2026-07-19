@@ -11,8 +11,8 @@ from kivy.utils import rgba
 
 
 class RippleButton(TouchRippleButtonBehavior, Label):
-    background_color = ColorProperty(rgba('#ED97B7ff'))
-    now_background_color = ColorProperty(rgba('#ED97B7ff'))
+    background_color = ColorProperty(rgba('#ED97B7FF'))
+    now_background_color = ColorProperty(rgba('#ED97B7FF'))
     press_background_color = ColorProperty(rgba('#E04D83FF'))
     background_color_duration = NumericProperty(0.05)
     radius = NumericProperty(0)

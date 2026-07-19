@@ -1,0 +1,206 @@
+#:kivy 2.0.0
+#:import Header widgets.header.Header
+#:import RippleButton widgets.button.RippleButton
+
+<RegisterScreen>:
+    BoxLayout:
+        orientation: 'vertical'
+        Header:
+            title: '注册'
+        ScrollView:
+            do_scroll_x: False
+            BoxLayout:
+                orientation: 'vertical'
+                size_hint_y: None
+                height: self.minimum_height
+                spacing: dp(2)
+                HugeLabel:
+                    size_hint_y: None
+                    height: dp(50)
+                    bold: 'true'
+                    text: '基础信息'
+                Label:
+                    size_hint_y: None
+                    height: dp(30)
+                    padding: dp(8), 0
+                    text_size: self.size
+                    halign: 'left'
+                    valign: 'center'
+                    text: '昵称'
+                TextInput:
+                    id: name
+                    size_hint_y: None
+                    height: dp(30)
+                    multiline: False
+                Label:
+                    size_hint_y: None
+                    height: dp(30)
+                    padding: dp(8), 0
+                    text_size: self.size
+                    halign: 'left'
+                    valign: 'center'
+                    text: '用户名'
+                TextInput:
+                    id: email
+                    size_hint_y: None
+                    height: dp(30)
+                    multiline: False
+                Label:
+                    size_hint_y: None
+                    height: dp(30)
+                    padding: dp(8), 0
+                    text_size: self.size
+                    halign: 'left'
+                    valign: 'center'
+                    text: '密码'
+                TextInput:
+                    id: pwd
+                    size_hint_y: None
+                    height: dp(30)
+                    password: True
+                    multiline: False
+                Label:
+                    size_hint_y: None
+                    height: dp(30)
+                    padding: dp(8), 0
+                    text_size: self.size
+                    halign: 'left'
+                    valign: 'center'
+                    text: '重复密码'
+                TextInput:
+                    id: pwd2
+                    size_hint_y: None
+                    height: dp(30)
+                    password: True
+                    multiline: False
+                BoxLayout:
+                    size_hint_y: None
+                    height: dp(30)
+                    Label:
+                        padding: dp(8), 0
+                        text_size: self.size
+                        halign: 'left'
+                        valign: 'center'
+                        text: '性别'
+                    RippleButton:
+                        id: gender
+                        text: '选取性别'
+                Label:
+                    size_hint_y: None
+                    height: dp(30)
+                    padding: dp(8), 0
+                    text_size: self.size
+                    halign: 'left'
+                    valign: 'center'
+                    text: '生日'
+                BoxLayout:
+                    size_hint_y: None
+                    height: dp(30)
+                    TextInput:
+                        id: year
+                        size_hint_x: 2
+                        input_filter: 'int'
+                        multiline: False
+                    Label:
+                        text: '年'
+                    TextInput:
+                        id: month
+                        input_filter: 'int'
+                        multiline: False
+                    Label:
+                        text: '月'
+                    TextInput:
+                        id: date
+                        input_filter: 'int'
+                        multiline: False
+                    Label:
+                        text: '日'
+                HugeLabel:
+                    size_hint_y: None
+                    height: dp(50)
+                    bold: 'true'
+                    text: '安全问题'
+                Label:
+                    size_hint_y: None
+                    height: dp(30)
+                    padding: dp(8), 0
+                    text_size: self.size
+                    halign: 'left'
+                    valign: 'center'
+                    text: '安全问题1'
+                TextInput:
+                    id: question1
+                    size_hint_y: None
+                    height: dp(30)
+                    multiline: False
+                Label:
+                    size_hint_y: None
+                    height: dp(30)
+                    padding: dp(8), 0
+                    text_size: self.size
+                    halign: 'left'
+                    valign: 'center'
+                    text: '答案1'
+                TextInput:
+                    id: answer1
+                    size_hint_y: None
+                    height: dp(30)
+                    multiline: False
+                Label:
+                    size_hint_y: None
+                    height: dp(30)
+                    padding: dp(8), 0
+                    text_size: self.size
+                    halign: 'left'
+                    valign: 'center'
+                    text: '安全问题2'
+                TextInput:
+                    id: question2
+                    size_hint_y: None
+                    height: dp(30)
+                    multiline: False
+                Label:
+                    size_hint_y: None
+                    height: dp(30)
+                    padding: dp(8), 0
+                    text_size: self.size
+                    halign: 'left'
+                    valign: 'center'
+                    text: '答案2'
+                TextInput:
+                    id: answer2
+                    size_hint_y: None
+                    height: dp(30)
+                    multiline: False
+                Label:
+                    size_hint_y: None
+                    height: dp(30)
+                    padding: dp(8), 0
+                    text_size: self.size
+                    halign: 'left'
+                    valign: 'center'
+                    text: '安全问题3'
+                TextInput:
+                    id: question3
+                    size_hint_y: None
+                    height: dp(30)
+                    multiline: False
+                Label:
+                    size_hint_y: None
+                    height: dp(30)
+                    padding: dp(8), 0
+                    text_size: self.size
+                    halign: 'left'
+                    valign: 'center'
+                    text: '答案3'
+                TextInput:
+                    id: answer3
+                    size_hint_y: None
+                    height: dp(30)
+                    multiline: False
+                RippleButton:
+                    size_hint_y: None
+                    height: dp(60)
+                    font_size: dp(24)
+                    text: '注册！'
+                    on_release: root.register()

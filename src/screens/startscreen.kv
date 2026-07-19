@@ -5,20 +5,29 @@
     BoxLayout:
         orientation: 'vertical'
         Label:
-            size_hint_y: 2
+            size_hint_y: 4
             text: 'PicACG Viewer'
             bold: True
             font_size: dp(36)
         Label:
+            size_hint_y: 2
             text: 'Developed by TalkDe'
             font_size: dp(16)
         RippleButton:
-            text: '编辑配置'
-            on_release: root.manager.screen_open('config')
-            color: 1, 1, 1, 1
-            font_size: dp(24)
-        RippleButton:
+            size_hint_y: 3
             text: '进入！'
             on_release: root.sign_in()
             color: 1, 1, 1, 1
-            font_size: dp(24)
+            font_size: dp(28)
+        RippleButton:
+            size_hint_y: 1
+            text: '编辑配置'
+            on_release: root.manager.screen_open('config')
+            color: 1, 1, 1, 1
+            font_size: dp(20)
+        RippleButton:
+            size_hint_y: 1
+            text: '注册'
+            on_release: root.manager.screen_open('register')
+            color: 1, 1, 1, 1
+            font_size: dp(20)
