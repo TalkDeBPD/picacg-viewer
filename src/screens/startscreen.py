@@ -52,5 +52,4 @@ class StartScreen(ReuseScreen):
             self._locked = False
 
 
-
 Builder.load_file('screens/startscreen.kv')

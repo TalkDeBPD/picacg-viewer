@@ -15,7 +15,7 @@ def format_time(timestamp: float) -> str:
 
 
 def format_http_error(e: HTTPError) -> str:
-    result = type(e).__name__
+    result = f'{type(e).__name__}: {str(e)}'
     if hasattr(e, 'request'):
         result += f'\n请求：{e.request.method} {e.request.url}'
     if hasattr(e, 'response'):
