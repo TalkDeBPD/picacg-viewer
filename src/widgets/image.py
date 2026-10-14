@@ -8,15 +8,14 @@ from kivy.uix.image import Image
 from kivy.properties import NumericProperty, StringProperty, BooleanProperty
 from kivy.uix.boxlayout import BoxLayout
 from kivy.uix.label import Label
-from picaapi.downloader import PictureClient
+from picaapi.downloader import MultiHostPictureClient
 
 
 async def load_texture(category, path, max_tries: int = 3):
     data = Cache.get(category, path)
-
     if data is None:
         picture_client = App.get_running_app().picture_client
-        assert isinstance(picture_client, PictureClient)
+        assert isinstance(picture_client, MultiHostPictureClient)
         for i in range(max_tries):
             try:
                 data = await picture_client.fetch(path)

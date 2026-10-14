@@ -8,11 +8,6 @@
         orientation: 'vertical'
         Header:
             title: root.KEYS.get(root.key, '') + '：' + root.value
-#        RippleButton:
-#            size_hint_y: None
-#            height: dp(30)
-#            text: '刷新'
-#            on_release: root.flush()
         BoxLayout:
             size_hint_y: None
             height: dp(30)
@@ -25,6 +20,7 @@
                 input_filter: 'int'
                 multiline: False
                 text: '1'
+                on_text_validate: root.flush()
             Label:
                 text: '/' + str(root.ptotal)
                 text_size: self.width - dp(8), None

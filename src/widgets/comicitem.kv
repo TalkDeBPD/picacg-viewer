@@ -4,6 +4,12 @@
 <ComicItem>:
     height: dp(100)
     size_hint_y: None
+    canvas.after:
+        Color:
+            rgba: rgba('#ED97B7ff')
+        Line:
+            points: [root.x, root.y, root.x + root.width, root.y]
+            width: 1
     RetryImage:
         id: image
         size_hint_x: None

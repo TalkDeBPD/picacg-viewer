@@ -25,16 +25,19 @@ class ComicsScreen(PageScreen):
     cache = {}
     _locked = False
 
+    def on_kv_post(self, base_widget):
+        self.ids.sort.bind(value=lambda _w, _v: self.flush())
+
     def save_content(self) -> tuple:
         args = self._build_args()
-        if not self._locked and args not in self.cache:
-            self.cache[args] = (self.ptotal, self.docs)
+        #if not self._locked and args not in self.cache:
+        #    self.cache[args] = (self.ptotal, self.docs)
         return args
 
     def load_content(self, args):
         if self._build_args() != args:
-            self.key, self.value, self.sort, self.pindex = args
-            asyncio.create_task(self.async_load_content())
+            self.key, self.value, self.ids.sort.value, self.pindex = args
+            self.load_page()
 
     async def async_load_content(self):
         if self._locked:
@@ -53,6 +56,8 @@ class ComicsScreen(PageScreen):
                         self.pindex = page.page
                         self.ptotal = page.pages
                         self.docs = page.docs
+                        if args not in self.cache:
+                            self.cache[args] = (self.ptotal, self.docs)
                     except HTTPError:
                         if i == 2:
                             raise
@@ -74,7 +79,7 @@ class ComicsScreen(PageScreen):
         except ValueError:
             self.pindex = 1
         self.sort = self.ids.sort.value
-        asyncio.create_task(self.async_load_content())
+        self.load_page()
 
     def _build_args(self) -> tuple:
         return self.key, self.value, self.sort, self.pindex

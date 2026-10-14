@@ -13,6 +13,7 @@
                 size_hint_x: 1
                 font_size: dp(28)
                 color: rgba('#ffffffff')
+                on_release: root.manager.screen_open('favorite')
             Label:
                 text: ''
                 size_hint_x: 3
@@ -21,7 +22,7 @@
                 text: '搜索'
                 font_size: dp(28)
                 color: rgba('#ffffffff')
-                on_release: root.open_search()
+                on_release: root.manager.screen_open('search')
         ScrollView:
             id: scroll
             do_scroll_x: False

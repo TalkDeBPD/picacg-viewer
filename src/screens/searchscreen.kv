@@ -16,6 +16,7 @@
                 size_hint_x: 3
                 multiline: False
                 hint_text: '搜索关键字……'
+                on_text_validate: root.on_search()
             RippleButton:
                 text: '搜索'
                 on_release: root.on_search()

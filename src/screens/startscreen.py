@@ -4,7 +4,7 @@ from kivy.app import App
 from kivy.lang import Builder
 from picaapi.client import Client as PicaClient
 from picaapi.error import PicaAPIError
-from picaapi.downloader import PictureClient, DEFAULT_PICTURE_SERVER
+from picaapi.downloader import PictureClient, DEFAULT_PICTURE_SERVER, MultiHostPictureClient
 from util import format_http_error
 from screens.manager import ReuseScreen
 from widgets.popup import MessagePopup
@@ -25,10 +25,9 @@ class StartScreen(ReuseScreen):
         else:
             app.api_client = PicaClient()
         if app.config_store.exists('pictureserver') and app.config_store.get('pictureserver')['data']:
-            app.picture_client = PictureClient(app.config_store.get('pictureserver')['data'], max_conn=20)
+            app.picture_client = PictureClient(app.config_store.get('pictureserver')['data'])
         else:
-            app.picture_client = PictureClient(DEFAULT_PICTURE_SERVER[1])
-
+            app.picture_client = MultiHostPictureClient(DEFAULT_PICTURE_SERVER)
         try:
             flag: bool = False
             if app.config_store.exists('token') and app.config_store.get('token')['data']:

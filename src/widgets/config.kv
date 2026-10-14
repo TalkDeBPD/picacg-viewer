@@ -1,4 +1,5 @@
 #:kivy 2.3.0
+#:import RippleButton widgets.button.RippleButton
 
 <ConfigPage>:
     orientation: 'vertical'
@@ -48,12 +49,12 @@
         BoxLayout:
             height: dp(30)
             size_hint_y: None
-            Button:
+            RippleButton:
                 text: '确定'
                 size_hint_x: 0.5
                 on_release: root.confirm()
                 color: 1, 1, 1, 1
-            Button:
+            RippleButton:
                 text: '取消'
                 size_hint_x: 0.5
                 on_release: root.dismiss()
@@ -76,12 +77,12 @@
         BoxLayout:
             height: dp(30)
             size_hint_y: None
-            Button:
+            RippleButton:
                 text: '确定'
                 size_hint_x: 0.5
                 on_release: root.confirm()
                 color: 1, 1, 1, 1
-            Button:
+            RippleButton:
                 text: '取消'
                 size_hint_x: 0.5
                 on_release: root.dismiss()

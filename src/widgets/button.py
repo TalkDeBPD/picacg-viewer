@@ -40,7 +40,9 @@ class SortButton(RippleButton):
         'ld': '最多爱心',
         'vd': '最多观看',
     }
+
     def on_release(self):
+        super(SortButton, self).on_release()
         popup = SortPopup(value=self.value)
         popup.bind(value=self.setter('value'))
         popup.open()

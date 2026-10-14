@@ -3,19 +3,20 @@ from httpx import HTTPError
 from kivy.app import App
 from kivy.lang import Builder
 from kivy.properties import NumericProperty, ListProperty
+from kivy.uix.boxlayout import BoxLayout
 from picaapi.client import Client as PicaClient
 from util import format_http_error
 from screens.manager import ReuseScreen
 from widgets.comicitem import ComicItem
 from widgets.popup import MessagePopup
 
-class LeaderBoardScreen(ReuseScreen):
+class LeaderboardScreen(ReuseScreen):
     docs = [[], [], []]
     txts = ListProperty([ '日排行', '周排行', '月排行' ])
     rid = NumericProperty(0)
 
     def __init__(self, **kwargs):
-        super(LeaderBoardScreen, self).__init__(**kwargs)
+        super(LeaderboardScreen, self).__init__(**kwargs)
         self.bind(rid=self.rid_changed)
 
     def load_content(self, args):
@@ -35,20 +36,26 @@ class LeaderBoardScreen(ReuseScreen):
                     if i == 2:
                         raise
             # 更新控件
-            self.ids.docs.clear_widgets()
-            for comic in self.docs[self.rid]:
-                item = ComicItem(comic=comic)
-                item.load()
-                self.ids.docs.add_widget(item)
+            self.update_widget()
         except HTTPError as e:
             MessagePopup(text=format_http_error(e), title='错误').open()
 
-    def rid_changed(self, widget, value):
+    def rid_changed(self, _widget, _value):
+        self.update_widget()
+
+    def update_widget(self):
         self.ids.docs.clear_widgets()
-        for comic in self.docs[self.rid]:
+        for i, comic in enumerate(self.docs[self.rid]):
+            bar = LeaderboardBar(rank=i+1, count=comic.leaderboardCount)
             item = ComicItem(comic=comic)
             item.load()
+            self.ids.docs.add_widget(bar)
             self.ids.docs.add_widget(item)
+
+
+class LeaderboardBar(BoxLayout):
+    rank = NumericProperty(0)
+    count = NumericProperty(0)
 
 
 Builder.load_file('screens/leaderboardscreen.kv')

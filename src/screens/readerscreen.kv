@@ -6,7 +6,7 @@
     BoxLayout:
         orientation: 'vertical'
         Header:
-            title: '阅读：' + root.title
+            title: f'阅读：{root.title}({root.pindex * 40 - 39}-{root.total if root.pindex == root.ptotal else root.pindex * 40})'
         BoxLayout:
             size_hint_y: None
             height: dp(30)

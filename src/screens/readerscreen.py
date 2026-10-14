@@ -15,6 +15,7 @@ class ReaderScreen(PageScreen):
     order = NumericProperty(1)
     scale = NumericProperty(1)
     title = StringProperty('')
+    total = NumericProperty(0)
     docs = []
     cache = {}
     _locked = False
@@ -33,9 +34,7 @@ class ReaderScreen(PageScreen):
             self._locked = True
             args = self._build_args()
             if args in self.cache:
-                self.docs = self.cache[args][0]
-                self.ptotal = self.cache[args][1]
-                self.title = self.cache[args][2]
+                self.docs, self.ptotal, self.title, self.total = self.cache[args]
             else:
                 api_client = App.get_running_app().api_client
                 assert isinstance(api_client, PicaClient)
@@ -44,7 +43,8 @@ class ReaderScreen(PageScreen):
                         page, self.title = await api_client.pages(self.comic_id, self.order, self.pindex)
                         self.docs = page.docs
                         self.ptotal = page.pages
-                        self.cache[args] = (self.docs, self.ptotal, self.title)
+                        self.total = page.total
+                        self.cache[args] = (self.docs, self.ptotal, self.title, self.total)
                     except HTTPError:
                         if i == 2:
                             raise

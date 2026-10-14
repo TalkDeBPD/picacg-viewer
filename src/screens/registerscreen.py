@@ -76,7 +76,7 @@ class RegisterScreen(ReuseScreen):
         except HTTPError as e:
             MessagePopup(text=format_http_error(e), title='网络错误').open()
         finally:
-            await client.close()
+            await client.aclose()
             self._locked = False
 
     def set_gender(self, widget):

@@ -15,6 +15,7 @@ class PicacgViewerApp(App):
     picture_client = None
 
     def build(self):
+        self.title = 'PicACG Viewer'
         self.config_store = JsonStore(os.path.join(self.user_data_dir, 'config.json'))
         return super().build()
 

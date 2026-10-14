@@ -45,9 +45,6 @@ class CategoriesScreen(ReuseScreen):
             image.load()
             self.ids.gl.add_widget(image)
 
-    def open_search(self):
-        self.manager.screen_open('search')
-
 
 class CategoryItem(ButtonBehavior, BoxLayout):
     text = StringProperty()

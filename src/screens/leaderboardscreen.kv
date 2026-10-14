@@ -2,7 +2,7 @@
 #:import Header widgets.header.Header
 #:import RippleButton widgets.button.RippleButton
 
-<LeaderBoardScreen>:
+<LeaderboardScreen>:
     BoxLayout:
         orientation: 'vertical'
         Header:
@@ -32,3 +32,18 @@
                 height: self.minimum_height
                 size_hint_y: None
                 orientation: 'vertical'
+
+<LeaderboardBar>:
+    size_hint_y: None
+    height: dp(28)
+    padding: dp(2)
+    HugeLabel:
+        text: f'No. {root.rank}'
+        text_size: self.size
+        valign: 'center'
+        halign: 'left'
+    Label:
+        text: f'{root.count}观看数'
+        text_size: self.size
+        valign: 'center'
+        halign: 'right'
