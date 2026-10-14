@@ -37,7 +37,7 @@ version = 0.1
 
 # (list) Application requirements
 # comma separated e.g. requirements = sqlite3,kivy
-requirements = python3,kivy==2.3.0,httpx,httpcore,picaapi==1.1.0,asyncio,aiofiles,h11,anyio,sniffio,idna,typing_extensions
+requirements = python3,kivy==2.3.0,httpx,httpcore,asyncio,aiofiles,h11,anyio,sniffio,idna,typing_extensions
 
 android.patches = ./p1.patch
 
