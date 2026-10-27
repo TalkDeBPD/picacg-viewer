@@ -50,7 +50,7 @@ class FavoriteScreen(PageScreen):
                         self.ptotal = page.pages
                         self.docs = page.docs
                         self._initial = False
-                        if self.pindex in self.cache:
+                        if self.pindex not in self.cache:
                             self.cache[self.pindex] = self.docs
                     except HTTPError:
                         if i == 2:

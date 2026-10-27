@@ -1,14 +1,14 @@
 import asyncio
-from httpx import HTTPError
+import json
+import aiofiles
+import webbrowser
 from kivy.lang import Builder
 from kivy.app import App
 from kivy.properties import StringProperty, BooleanProperty, ObjectProperty
 from kivy.uix.behaviors import ButtonBehavior
 from kivy.uix.boxlayout import BoxLayout
-from picaapi.client import Client as PicaClient
-from util import format_http_error
+from picaapi.objects import Category
 from screens.manager import ReuseScreen
-from widgets.popup import MessagePopup
 
 
 class CategoriesScreen(ReuseScreen):
@@ -23,25 +23,15 @@ class CategoriesScreen(ReuseScreen):
         return super(CategoriesScreen, self).on_pre_enter()
 
     async def async_load(self):
-        app = App.get_running_app()
-        assert isinstance(app.api_client, PicaClient)
-
-        categories = None
-        for i in range(0, 3):
-            try:
-                categories = await app.api_client.categories()
-                break
-            except HTTPError as e:
-                if i == 2:
-                    MessagePopup(text=format_http_error(e), title='错误').open()
-                    return
-        if categories is None:
-            return
+        async with aiofiles.open('cached/categories.json', mode='r') as f:
+            content = await f.read()
+        data = json.loads(content)
+        categories = [Category(i) for i in data['categories']]
 
         for i in self.ids.gl.children:
             if isinstance(i, CategoryItem): i.load()
         for i in categories:
-            image = CategoryItem(text=i.title, image_path=i.thumb.path, is_web=i.isWeb, link=('' if i.link is None else i.link))
+            image = CategoryItem(text=i.title, image_path=f'img/categories/{i.thumb.originalName}', is_web=i.isWeb, link=('' if i.link is None else i.link), img_saved=True)
             image.load()
             self.ids.gl.add_widget(image)
 
@@ -59,7 +49,7 @@ class CategoryItem(ButtonBehavior, BoxLayout):
 
     def on_release(self):
         if self.is_web:
-            pass
+            webbrowser.open(self.link)
         else:
             App.get_running_app().root.screen_open('comics', ('c', self.text, 'dd', 1))
 

@@ -20,7 +20,7 @@ class LeaderboardScreen(ReuseScreen):
         self.bind(rid=self.rid_changed)
 
     def load_content(self, args):
-        if not self.docs[0]:
+        if not self.docs[2]:
             asyncio.create_task(self.async_load_content())
 
     async def async_load_content(self):

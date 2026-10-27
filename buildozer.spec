@@ -13,7 +13,7 @@ package.domain = top.talkdetest
 source.dir = ./src/
 
 # (list) Source files to include (let empty to include all the files)
-source.include_exts = py,png,jpg,kv,atlas,otf
+source.include_exts = py,png,jpg,kv,atlas,otf,json
 
 # (list) List of inclusions using pattern matching
 #source.include_patterns = assets/*,images/*.png
@@ -39,7 +39,7 @@ version = 0.1
 # comma separated e.g. requirements = sqlite3,kivy
 requirements = python3,kivy==2.3.0,httpx,httpcore,asyncio,aiofiles,h11,anyio,sniffio,idna,typing_extensions
 
-android.patches = ./p1.patch
+# android.patches = ./p1.patch
 
 # (str) Custom source folders for requirements
 # Sets custom source for any requirements with recipes

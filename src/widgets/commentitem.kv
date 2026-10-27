@@ -1,5 +1,6 @@
 #:kivy 2.0.0
 #:import RetryImage widgets.image.RetryImage
+#:import AvatarImage widgets.image.AvatarImage
 #:import format_time util.format_time
 
 <CommentItem>:
@@ -10,9 +11,9 @@
         size_hint: None, None
         width: dp(60)
         height: right.height
-        RetryImage:
+        AvatarImage:
             id: image
-            path: hasattr(root.comment, 'user') and ('' if root.comment.user.avatar is None else root.comment.user.avatar.path)
+            path: root.comment.user.avatar.path if hasattr(root.comment, 'user') and root.comment.user.avatar else ''
             size_hint: None, None
             size: dp(60), dp(60)
         Widget:

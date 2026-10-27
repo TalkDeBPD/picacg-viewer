@@ -1,0 +1,62 @@
+#:kivy 2.3.0
+#:import Header widgets.header.Header
+#:import RippleButton widgets.button.RippleButton
+#:import AvatarImage widgets.image.AvatarImage
+#:import calculate_exp picaapi.base.calculate_exp
+
+<ProfileScreen>:
+    BoxLayout:
+        orientation: 'vertical'
+        Header:
+            title: '用户信息'
+        ScrollView:
+            do_scroll_x: False
+            BoxLayout:
+                orientation: 'vertical'
+                size_hint_y: None
+                height: self.minimum_height
+                AvatarImage:
+                    id: avatar
+                    size_hint: None, None
+                    size: dp(100), dp(100)
+                    padding: 0, dp(4)
+                    pos_hint: {'center_x': 0.5}
+                    path: root.profile.avatar.path if hasattr(root.profile, 'avatar') and root.profile.avatar else ''
+                HugeLabel:
+                    text: getattr(root.profile, 'name', '')
+                    size_hint_y: None
+                    height: dp(36)
+                    valign: 'center'
+                    halign: 'center'
+                    text_size: self.size
+                Label:
+                    text: getattr(root.profile, 'title', '萌新')
+                    size_hint_y: None
+                    height: dp(20)
+                    valign: 'center'
+                    halign: 'center'
+                    text_size: self.size
+                Label:
+                    text: f'Lv. {getattr(root.profile, "level", 1)}'
+                    size_hint_y: None
+                    height: dp(20)
+                    valign: 'center'
+                    halign: 'center'
+                    text_size: self.size
+                TinyLabel:
+                    text: f'{getattr(root.profile, "exp", 0)}/{calculate_exp(getattr(root.profile, "level", 1) + 1)}'
+                    size_hint_y: None
+                    height: dp(16)
+                    valign: 'center'
+                    halign: 'center'
+                    text_size: self.size
+                Label:
+                    size_hint_y: None
+                    height: self.texture_size[1]
+                    text_size: self.width, None
+                    text: getattr(root.profile, 'slogan', '')
+                RippleButton:
+                    text: '我的收藏'
+                    size_hint_y: None
+                    height: dp(30)
+                    on_release: root.manager.screen_open('favorite')

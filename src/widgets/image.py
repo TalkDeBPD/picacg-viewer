@@ -4,6 +4,7 @@ from httpx import HTTPError
 from kivy.app import App
 from kivy.cache import Cache
 from kivy.core.image import Image as CoreImage
+from kivy.graphics import Color, Ellipse, StencilPush, StencilUse, StencilUnUse, StencilPop
 from kivy.uix.image import Image
 from kivy.properties import NumericProperty, StringProperty, BooleanProperty
 from kivy.uix.boxlayout import BoxLayout
@@ -33,6 +34,7 @@ async def load_texture(category, path, max_tries: int = 3):
 class RetryImage(BoxLayout):
     max_tries = NumericProperty(3)
     path = StringProperty()
+    placeholder_path = StringProperty('img/placeholder.jpg')
     fit_mode = StringProperty('contain')
     saved = BooleanProperty(False)
 
@@ -40,13 +42,12 @@ class RetryImage(BoxLayout):
         asyncio.create_task(self.async_load())
 
     async def async_load(self):
-        if not self.path:
-            return
         self.clear_widgets()
         label = Label(text='Loading...', valign='center', halign='center')
         label.bind(size=label.setter('text_size'))
         self.add_widget(label)
         try:
+            if not self.path: raise HTTPError('Missing path')
             if self.saved:
                 image = Image(source=self.path, fit_mode=self.fit_mode)
             else:
@@ -54,9 +55,36 @@ class RetryImage(BoxLayout):
                 image = Image(texture=texture, fit_mode=self.fit_mode)
             self.clear_widgets()
             self.add_widget(image)
-        except HTTPError as e:
+        except HTTPError:
             self.clear_widgets()
-            self.add_widget(Image(source='img/placeholder.jpg', fit_mode=self.fit_mode))
+            self.add_widget(Image(source=self.placeholder_path if self.placeholder_path else 'img/placeholder.jpg', fit_mode=self.fit_mode))
+
+
+class AvatarImage(RetryImage):
+    def __init__(self, **kwargs):
+        kwargs.setdefault('fit_mode', 'cover')
+        kwargs.setdefault('placeholder_path', 'img/placeholder_avatar.png')
+        super().__init__(**kwargs)
+        with self.canvas.before:
+            StencilPush()
+            Color(1, 1, 1, 1)
+            self.mask = Ellipse(pos=self.pos, size=self.size)
+            StencilUse()
+        with self.canvas.after:
+            StencilUnUse()
+            Color(1, 1, 1, 1)
+            self.clear_mask = Ellipse(pos=self.pos, size=self.size)
+            StencilPop()
+        self.bind(pos=self._update_shape, size=self._update_shape)
+
+    def _update_shape(self, *args):
+        self.mask.pos = self.pos
+        self.mask.size = self.size
+        self.clear_mask.pos = self.pos
+        self.clear_mask.size = self.size
+
+    async def async_load(self):
+        await super().async_load()
 
 
 class ComicImage(BoxLayout):

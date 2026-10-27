@@ -7,6 +7,7 @@ from kivy.core.window import Window
 from kivy.lang import Builder
 from kivy.storage.jsonstore import JsonStore
 from kivy.utils import platform
+import picaapi.base
 
 
 class PicacgViewerApp(App):
@@ -21,6 +22,8 @@ class PicacgViewerApp(App):
 
 
 if __name__ == '__main__':
+    # 强制禁用Brotli
+    picaapi.base.HAS_BROTLI = False
     # 重置字体
     LabelBase.register(
         name='Roboto',
