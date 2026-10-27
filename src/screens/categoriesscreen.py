@@ -31,7 +31,7 @@ class CategoriesScreen(ReuseScreen):
         for i in self.ids.gl.children:
             if isinstance(i, CategoryItem): i.load()
         for i in categories:
-            image = CategoryItem(text=i.title, image_path=f'img/categories/{i.thumb.originalName}', is_web=i.isWeb, link=('' if i.link is None else i.link), img_saved=True)
+            image = CategoryItem(text=i.title, image_path=f'img/categories/{i.thumb.originalName}', is_web=i.isWeb, is_category=not i.isWeb, link=('' if i.link is None else i.link), img_saved=True)
             image.load()
             self.ids.gl.add_widget(image)
 
@@ -42,6 +42,7 @@ class CategoryItem(ButtonBehavior, BoxLayout):
     img_saved = BooleanProperty(False)
     image = ObjectProperty(None)
     is_web = BooleanProperty(False)
+    is_category = BooleanProperty(False)
     link = StringProperty()
 
     def load(self):
@@ -50,7 +51,7 @@ class CategoryItem(ButtonBehavior, BoxLayout):
     def on_release(self):
         if self.is_web:
             webbrowser.open(self.link)
-        else:
+        elif self.is_category:
             App.get_running_app().root.screen_open('comics', ('c', self.text, 'dd', 1))
 
 
